@@ -126,8 +126,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # Project files
-packaged.yml
+packaged.yaml
 dist
-infra/packaged*.yml
+infra/packaged*.yaml
 
 # End of https://www.gitignore.io/api/osx,node,linux,windows

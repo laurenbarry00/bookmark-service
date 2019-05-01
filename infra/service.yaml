@@ -9,19 +9,19 @@ Resources:
   IamRoles:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: roles.yml
+      TemplateURL: roles.yaml
 
   CodeCommitRepo:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: codecommit.yml
+      TemplateURL: codecommit.yaml
       Parameters:
         RepoName: !Ref CodeCommitRepoName
 
   CodePipeline:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: codepipeline.yml
+      TemplateURL: codepipeline.yaml
       Parameters:
         ArtifactBucketName: !GetAtt IamRoles.Outputs.ArtifactBucketName
         CodePipelineServiceRoleArn: !GetAtt IamRoles.Outputs.CodePipelineServiceRoleArn

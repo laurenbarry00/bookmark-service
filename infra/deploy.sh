@@ -7,13 +7,13 @@ BucketName=bookmark-service-infra-adamulvi
 
 # Package and deploy
 aws cloudformation package \
---template-file service.yml \
+--template-file service.yaml \
 --s3-bucket ${BucketName} \
---output-template-file packaged-${StackName}-template.yml
+--output-template-file packaged-${StackName}-template.yaml
 
 aws cloudformation deploy \
 --stack-name ${StackName} \
---template-file packaged-${StackName}-template.yml \
+--template-file packaged-${StackName}-template.yaml \
 --parameter-overrides \
 "CodeCommitRepoName=${CodeCommitRepoName}" \
 --s3-bucket ${BucketName} \

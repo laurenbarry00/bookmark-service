@@ -48,3 +48,17 @@ sam local start-api
 ```bash
 sam local invoke HelloWorldFunction --event event.json
 ```
+
+**Running the Swagger editor**
+
+1. Start the service
+```bash
+make swagger-start
+```
+
+2. Point your browser to http://0.0.0.0:8080
+
+3. When done, stop the service
+```bash
+make swagger-stop
+```
