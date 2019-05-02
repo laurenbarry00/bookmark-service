@@ -27,4 +27,4 @@ Resources:
         CodePipelineServiceRoleArn: !GetAtt IamRoles.Outputs.CodePipelineServiceRoleArn
         CodeBuildServiceRoleArn: !GetAtt IamRoles.Outputs.CodeBuildServiceRoleArn
         CodeCommitRepositoryName: !Ref CodeCommitRepoName
-        CodeCommitBranchName: master
+        CodeCommitBranchName: swagger
