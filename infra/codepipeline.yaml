@@ -72,6 +72,7 @@ Resources:
                   phases:
                     build:
                       commands:
+                        - aws s3 cp swagger/bookmark-new.yaml s3://bookmark-service-infra-adamulvi
                         - npm install
                         - make build
                         - aws cloudformation package --template-file template.yaml --s3-bucket $S3BUCKET --output-template-file outputtemplate.yaml

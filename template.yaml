@@ -46,10 +46,10 @@ Resources:
 Outputs:
   SimpleFunctionApi:
     Description: "API Gateway endpoint URL for Prod stage for simple function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Value: !Sub "https://${ApiGatewayApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
   SimpleFunction:
     Description: "Simple Function ARN"
-    Value: !GetAtt SimpleFunction.Arn
+    Value: !GetAtt GetLambdaFunction.Arn
   SimpleFunctionIamRole:
     Description: "Implicit IAM Role created for a simple function"
-    Value: !GetAtt SimpleFunctionRole.Arn
+    Value: !GetAtt GetLambdaFunctionRole.Arn
