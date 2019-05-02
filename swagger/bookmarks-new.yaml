@@ -1,0 +1,143 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: "bookmark-service"
+  description: Lambda-based microservice to store lists of hyperlinks
+basePath: /
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+
+paths:
+  /bookmark/{title}:
+    x-summary: Bookmark Service
+    get:
+      x-amazon-apigateway-integration:
+        uri:
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetLambdaFunction.Arn}/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        responses: {}
+      summary: Get a bookmark
+      parameters:
+        - name: "title"
+          in: "path"
+          description: "Title of bookmark to return"
+          required: true
+          type: "string"
+        - name: "Access-Control-Allow-Origin"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Bookmark'
+          examples:
+            application/json:
+              - title: 'cool-programming-links'
+                links:
+                  - title: 'Google home page'
+                    link: "https://google.com"
+                  - title: 'Typescript is cool'
+                    link: "https://typescript.io"
+    delete:
+      summary: Delete a bookmark
+      description: Delete a bookmark
+      parameters:
+        - name: "title"
+          in: "path"
+          description: "Title of bookmark to delete"
+          required: true
+          type: "string"
+        - name: "Access-Control-Allow-Origin"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        400:
+          description: "Invalid bookmark"
+        404:
+          description: "Bookmark not found"
+
+  /bookmark:
+    post:
+      description: >-
+        Create a new bookmark
+      x-amazon-apigateway-integration:
+        uri:
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PostLambdaFunction.Arn}/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        responses: {}
+      summary: Create a new bookmark
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Bookmark'
+        - name: "Access-Control-Allow-Origin"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        200:
+          description: Successful Response
+        405:
+          description: Method not allowed
+    put:
+      description: >-
+        Update a bookmark
+      x-amazon-apigateway-integration:
+        uri:
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PutLambdaFunction.Arn}/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "PUT"
+        type: "aws_proxy"
+        responses: {}
+      summary: Update a bookmark
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Bookmark'
+        - name: "Access-Control-Allow-Origin"
+          in: "header"
+          required: false
+          type: "string"
+      responses:
+        200:
+          description: Successful Response
+        405:
+          description: Method not allowed
+
+definitions:
+  Bookmark:
+    title: Bookmark
+    type: object
+    properties:
+      title:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/Link'
+  Link:
+    title: Link
+    type: object
+    properties:
+      title:
+        type: string
+      url:
+        type: string
+
