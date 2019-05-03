@@ -47,42 +47,42 @@ paths:
           description: "Internal Server Error"
 
 
-  # /bookmark/{title}:
-  #   get:
-  #     summary: Get a bookmark
-  #     description: Get a bookmark
+  /bookmark/{title}:
+    get:
+      summary: Get a bookmark
+      description: Get a bookmark
 
-  #     x-amazon-apigateway-request-validators:
-  #       basic:
-  #         validateRequestParameters: true
-  #     x-amazon-apigateway-integration:
-  #       uri: Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetLambdaFunction.Arn}/invocations"
-  #       passthroughBehavior: "when_no_match"
-  #       httpMethod: "GET"
-  #       type: "aws_proxy"
-  #       responses: {}
+      x-amazon-apigateway-request-validators:
+        basic:
+          validateRequestParameters: true
+      x-amazon-apigateway-integration:
+        uri: Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetLambdaFunction.Arn}/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "GET"
+        type: "aws_proxy"
+        responses: {}
 
-  #     parameters:
-  #       - name: "title"
-  #         in: "path"
-  #         description: "Title of bookmark to return"
-  #         required: true
-  #         type: "string"
-  #     responses:
-  #       200:
-  #         description: Successful Response
-  #         schema:
-  #           type: object
-  #           items:
-  #             $ref: '#/definitions/Bookmark'
-  #         examples:
-  #           application/json:
-  #             - title: 'cool-programming-links'
-  #               links:
-  #                 - title: 'Google home page'
-  #                   link: "https://google.com"
-  #                 - title: 'Typescript is cool'
-  #                   link: "https://typescript.io"
+      parameters:
+        - name: "title"
+          in: "path"
+          description: "Title of bookmark to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Bookmark'
+          examples:
+            application/json:
+              - title: 'cool-programming-links'
+                links:
+                  - title: 'Google home page'
+                    link: "https://google.com"
+                  - title: 'Typescript is cool'
+                    link: "https://typescript.io"
 
 definitions:
   Bookmark:
