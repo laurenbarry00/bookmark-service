@@ -9,6 +9,7 @@ test: build
 	npm run test
 
 infrastructure:
+	aws s3 cp ./swagger/bookmarks-new.yaml s3://bookmark-service-infra-adamulvi
 	(cd infra && ./deploy.sh)
 
 swagger-start:

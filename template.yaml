@@ -28,18 +28,10 @@ Resources:
       Handler: simple.handler
       Runtime: nodejs8.10
       Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
-
         Bookmark:
           Type: Api
           Properties:
             RestApiId: !Ref ApiGatewayApi
-            Path: /bookmark/{title}
-            Method: ANY
       Tags:
         Project: bookmark-service
 

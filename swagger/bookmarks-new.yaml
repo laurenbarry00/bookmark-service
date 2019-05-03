@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: "bookmark-service"
-  description: Lambda-based microservice to store lists of hyperlinks
+  description: Lambda-based microservice to store lists of hyperlinks 2
 basePath: /
 schemes:
 - http
@@ -19,7 +19,7 @@ paths:
         uri:
           Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetLambdaFunction.Arn}/invocations"
         passthroughBehavior: "when_no_match"
-        httpMethod: "POST"
+        httpMethod: "GET"
         type: "aws_proxy"
         responses: {}
       summary: Get a bookmark
@@ -29,10 +29,10 @@ paths:
           description: "Title of bookmark to return"
           required: true
           type: "string"
-        - name: "Access-Control-Allow-Origin"
-          in: "header"
-          required: false
-          type: "string"
+        # - name: "Access-Control-Allow-Origin"
+        #   in: "header"
+        #   required: false
+        #   type: "string"
       responses:
         200:
           description: Successful Response
