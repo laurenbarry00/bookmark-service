@@ -28,12 +28,25 @@ Resources:
       Handler: simple.handler
       Runtime: nodejs8.10
       Events:
-        Bookmark:
+        GetBookmark:
           Type: Api
           Properties:
             RestApiId: !Ref ApiGatewayApi
-      Tags:
-        Project: bookmark-service
+            Path: /bookmark/{title}
+            Method: GET
+  PostLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist
+      Handler: simple.handler
+      Runtime: nodejs8.10
+      Events:
+        PostBookmark:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGatewayApi
+            Path: /bookmark
+            Method: POST
 
 Outputs:
   SimpleFunctionApi:
