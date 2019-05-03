@@ -19,7 +19,7 @@ Resources:
           'Fn::Transform':
             Name: 'AWS::Include'
             Parameters:
-              Location: s3://bookmark-service-infra-adamulvi/bookmarks-new.yaml
+              Location: s3://bookmark-service-infra-adamulvi/bookmark-new.yaml
 
   GetLambdaFunction:
     Type: AWS::Serverless::Function
