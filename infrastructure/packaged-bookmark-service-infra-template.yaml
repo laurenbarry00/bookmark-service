@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template describing the service infrastructure
+Parameters:
+  CodeCommitRepoName:
+    Type: String
+Resources:
+  CodeCommitRepo:
+    Properties:
+      Parameters:
+        RepoName:
+          Ref: CodeCommitRepoName
+      TemplateURL: https://s3.amazonaws.com/bookmark-service-infra-adamulvi/5b21790dc079058dc69705d477786f7d.template
+    Type: AWS::CloudFormation::Stack
+  CodePipeline:
+    Properties:
+      Parameters:
+        ArtifactBucketName:
+          Fn::GetAtt:
+          - IamRoles
+          - Outputs.ArtifactBucketName
+        CodeBuildServiceRoleArn:
+          Fn::GetAtt:
+          - IamRoles
+          - Outputs.CodeBuildServiceRoleArn
+        CodeCommitBranchName: swagger
+        CodeCommitRepositoryName:
+          Ref: CodeCommitRepoName
+        CodePipelineServiceRoleArn:
+          Fn::GetAtt:
+          - IamRoles
+          - Outputs.CodePipelineServiceRoleArn
+      TemplateURL: https://s3.amazonaws.com/bookmark-service-infra-adamulvi/3962db85c71a57bd56ae196d9a1d567e.template
+    Type: AWS::CloudFormation::Stack
+  IamRoles:
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/bookmark-service-infra-adamulvi/94ce9d9b01d669bfa9c8b0bcca3cbb8e.template
+    Type: AWS::CloudFormation::Stack
