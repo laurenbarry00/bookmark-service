@@ -3,7 +3,7 @@
 # Configuration
 CodeCommitRepoName=bookmark-service
 StackName=bookmark-service-infra
-BucketName=bookmark-service-infra-adamulvi
+BucketName=bookmark-service-infra-laubarr
 
 # Package and deploy
 aws cloudformation package \
